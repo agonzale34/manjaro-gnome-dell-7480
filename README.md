@@ -13,7 +13,7 @@ This will take several minutes, so grab a cup of coffee
 - Preferences
 - go to the AUR tap
 - Check: Enable AUR support
-- Check: Updates form AUR
+- Check: Updates from AUR
 
 #### Install Oracle JDK 8
 ```bash
@@ -35,7 +35,6 @@ $ exec $SHELL
 $ pamac build nvm
 $ echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
 $ exec $SHELL
-
 ```
 
 ### Install System apps
@@ -44,27 +43,40 @@ $ sudo pacman -S sbt
 $ sudo pacman -S maven
 $ sudo pacman -S gradle
 $ sudo pacman -S terminator
+$ sudo pacman -S vlc
 ```
-- 
-- vlc
+
+### Remove not necessary packages
+```bash
+$ sudo pacman -Rs ms-office-online
+```
 
 ### Install AUR apps
 ```bash
 $ pamac build google-chrome
 $ pamac build postman-bin
+$ pamac build android-studio
+$ pamac build giteye
+$ pamac build webstorm
+$ pamac build datagrip
+$ pamac build pycharm
+$ pamac build intellij-idea-ultimate-edition
+$ pamac build slack-desktop
+$ pamac build spotify
+$ pamac build skypeforlinux-stable-bin
+$ pamac build oracle-sqldeveloper
 ```
-- intellij ultimate
-- giteye
-- webstorm
-- datagrip
-- pycharm
-
-
 
 ### Install gnome shell plugins
 - system-monitor: https://extensions.gnome.org/extension/120/system-monitor/
 - no-topleft-hot-corner: https://extensions.gnome.org/extension/118/no-topleft-hot-corner/
 
-### Install and cofigure docker 
+### Install and configure docker 
 
-
+install docker and docker compose
+```bash
+$ sudo pacman -S docker docker-compose
+$ sudo systemctl start docker
+$ sudo systemctl enable docker
+$ sudo usermod -aG docker $USER
+```
