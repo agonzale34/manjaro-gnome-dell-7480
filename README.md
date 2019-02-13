@@ -65,6 +65,10 @@ $ pamac build slack-desktop
 $ pamac build spotify
 $ pamac build skypeforlinux-stable-bin
 $ pamac build oracle-sqldeveloper
+
+$ pamac build copyq
+$ pamac build openfortivpn
+$ pamac build wps-office
 ```
 
 ### Install gnome shell plugins
@@ -80,3 +84,29 @@ $ sudo systemctl start docker
 $ sudo systemctl enable docker
 $ sudo usermod -aG docker $USER
 ```
+
+### Solve the Issue with the bluetooth audio
+
+LDAC/aptX codec support can be enabled by installing pulseaudio-modules-bt-git
+```bash
+$ pamac build pulseaudio-modules-bt-git
+```
+
+If PulseAudio fails when changing the profile to A2DP while using GNOME with GDM, you need to prevent GDM from starting its own instance of PulseAudio
+
+- Prevent Pulseaudio clients from automatically starting a server if one is not running by adding the following:
+```bash
+$ sudo gedit /var/lib/gdm/.config/pulse/client.conf
+```
+and add:
+```text
+autospawn = no
+daemon-binary = /bin/true
+```
+
+- Prevent systemd from starting Pulseaudio anyway with socket activation:
+```bash
+$ sudo -ugdm mkdir -p /var/lib/gdm/.config/systemd/user
+$ sudo -ugdm ln -s /dev/null /var/lib/gdm/.config/systemd/user/pulseaudio.socket
+```
+- Restart, and enjoy. 
